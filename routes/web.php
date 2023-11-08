@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -29,3 +30,10 @@ Route::middleware([
         return view('dashboard', compact('users'));
     })->name('dashboard');
 });
+
+// Route::get('/category', function () {
+//     return view('admin.category.category');
+// })->name('AllCat');
+// Category Routes
+Route::get('/all category', [CategoryController::class, 'index'])->name('AllCat');
+Route::post('/all category', [CategoryController::class, 'store'])->name('AllCat');

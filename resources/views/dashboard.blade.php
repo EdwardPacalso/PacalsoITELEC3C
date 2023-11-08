@@ -10,16 +10,20 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Created At</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $i = 1;
+                    @endphp
+
                     @foreach ($users as $user)
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{$i++}}</th>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->created_at}}</td>
