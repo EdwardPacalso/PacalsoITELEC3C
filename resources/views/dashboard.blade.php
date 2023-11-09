@@ -2,6 +2,9 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
+            Hi... {{Auth::user()->name}}
+            <b style="float:right">Total Users: </b>
+            <!-- <span class="badge text-danger"></span> -->
         </h2>
     </x-slot>
 
@@ -26,7 +29,7 @@
                         <th scope="row">{{$i++}}</th>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->created_at}}</td>
+                        <td>{{$user->created_at->diffForHumans()}}</td>
                     </tr>
                     @endforeach
                 </tbody>

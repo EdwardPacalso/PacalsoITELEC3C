@@ -16,11 +16,8 @@ class Category extends Model
         'category_name',
         'user_id'
     ];
-    public static function addCategory($categoryName)
+    public function user()
     {
-        $category = new Category;
-        $category->category_name = $categoryName;
-        $category->user_id = Auth::id();
-        $category->save();
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

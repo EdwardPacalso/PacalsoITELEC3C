@@ -35,5 +35,8 @@ Route::middleware([
 //     return view('admin.category.category');
 // })->name('AllCat');
 // Category Routes
-Route::get('/all category', [CategoryController::class, 'index'])->name('AllCat');
-Route::post('/all category', [CategoryController::class, 'store'])->name('AllCat');
+Route::get('/all/category', [CategoryController::class, 'index'])->name('AllCat');
+Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('add.category');
+Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('add.category');
+Route::get('/category/edit/{id}', [CategoryController::class, 'Edit']);
+Route::get('/category/update/{id}', [CategoryController::class, 'Update'])->name('edit.category');
