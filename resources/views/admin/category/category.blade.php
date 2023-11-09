@@ -10,12 +10,7 @@
             <div class="column">
                 <div class="row">
                     <div class="col-md-8">
-                        @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{session(success)}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
+
                         <div class="card">
                             <table class="table table-hover">
                                 <thead>
@@ -39,7 +34,14 @@
                                         <td>{{$category->created_at->diffForHumans()}}</td>
                                         <td>
                                             <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="" class="btn bn-danger">Delete</a>
+                                        </td>
+                                        <td>
+                                            <form action={{ route('delete.category', ['id' => $category->id]) }} method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -15,7 +15,7 @@
                             Edit Categories
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('category/edit/'.$categories->id) }}" method="POST">
+                            <form action={{ route('update.category', ['id' => $categories->id]) }} method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="category_name" class="form-label">Update Category Name</label>
