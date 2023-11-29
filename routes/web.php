@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -40,4 +41,11 @@ Route::get('/all/category', [CategoryController::class, 'index'])->name('AllCat'
 Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('add.category');
 Route::get('/category/edit/{id}', [CategoryController::class, 'Edit']);
 Route::post('/category/update/{id}', [CategoryController::class, 'Update'])->name('update.category');
-Route::post('/category/delete/{id}', [CategoryController::class, 'Delete'])->name('delete.category');
+
+Route::get('/category/remove/{id}', [CategoryController::class, 'RemoveCat']);
+Route::get('/category/restore/{id}', [CategoryController::class, 'RestoreCat']);
+Route::get('/category/delete/{id}', [CategoryController::class, 'DeleteCat']);
+
+//brand controller
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('brand');
+Route::post('/brand/add', [BrandController::class, 'AddBrand'])->name('add.brand');

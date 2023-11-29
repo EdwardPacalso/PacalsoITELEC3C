@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            All Category
         </h2>
     </x-slot>
 
@@ -10,8 +10,16 @@
             <div class="column">
                 <div class="row">
                     <div class="col-md-8">
-
+                        @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
                         <div class="card">
+                            <div class="card-header">
+                                Added List
+                            </div>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -19,6 +27,7 @@
                                         <th scope="col">Category Name</th>
                                         <th scope="col">User Id</th>
                                         <th scope="col">Created At</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,16 +42,11 @@
                                         <td>{{$category->user_id}}</td>
                                         <td>{{$category->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info">Update</a>
+                                            <a href="{{url('category/remove/'.$category->id)}}" class="btn btn-danger">Remove</a>
                                         </td>
-                                        <td>
-                                            <form action={{ route('delete.category', ['id' => $category->id]) }} method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
+
+
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -69,6 +73,48 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <!-- List of Deleted Items -->
+            <div class="col-md-8">
+                <div class="card">
+
+                    <div class="card-heard">
+                        Deleted List
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">Deleted At</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $i = 1;
+                            @endphp
+
+                            @foreach ($trashCat as $trash)
+                            <tr>
+                                <th scope="row">{{$categories->firstItem()+$loop->index}}</th>
+                                <td>{{$trash->category_name}}</td>
+                                <td>{{$trash->user_id}}</td>
+                                <td>{{$trash->deleted_at->diffForHumans()}}</td>
+                                <td>
+                                    <a href="{{url('category/restore/'.$trash->id)}}" class="btn btn-info">Restore</a>
+                                    <a href="{{url('category/delete/'.$trash->id)}}" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{$trashCat->links()}}
+                </div>
+            </div>
         </div>
+
+
     </div>
 </x-app-layout>
